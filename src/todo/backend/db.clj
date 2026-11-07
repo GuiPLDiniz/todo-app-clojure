@@ -58,3 +58,33 @@
              {:builder-fn rs/as-unqualified-lower-maps})]
         (format-todo todo)))))
 
+
+;; Alterna o estado de conclusao de uma tarefa
+(defn toggle-todo [id]
+  (jdbc/execute!
+   db-spec
+   ["UPDATE todos
+     SET completed = CASE
+       WHEN completed = 0 THEN 1
+       ELSE 0
+     END
+     WHERE id = ?"
+    id])
+
+  (when-let [todo
+             (jdbc/execute-one!
+              db-spec
+              ["SELECT id, title, completed, created_at
+                FROM todos
+                WHERE id = ?"
+               id]
+              {:builder-fn rs/as-unqualified-lower-maps})]
+    (format-todo todo)))
+
+;; Exclui uma tarefa pelo ID
+(defn delete-todo [id]
+  (let [resultado
+        (jdbc/execute-one!
+         db-spec
+         ["DELETE FROM todos WHERE id = ?" id])]
+    (pos? (:next.jdbc/update-count resultado))))

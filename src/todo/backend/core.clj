@@ -8,6 +8,7 @@
             [todo.backend.db :as db])
   (:gen-class))
 
+
 (def app-routes
   (ring/router
    [["/api/hello"
@@ -15,10 +16,17 @@
 
     ["/api/todos"
      {:get {:handler handler/list-todos-handler}
-      :post {:handler handler/create-todo-handler}}]]
+      :post {:handler handler/create-todo-handler}}]
+
+    ["/api/todos/:id/toggle"
+     {:post {:handler handler/toggle-todo-handler}}]
+
+    ["/api/todos/:id"
+     {:delete {:handler handler/delete-todo-handler}}]]
 
    {:data {:muuntaja m/instance
            :middleware [muuntaja/format-middleware]}}))
+
 
 
 (defn wrap-cors [handler]
