@@ -157,7 +157,7 @@ https://lambdageo-edu.github.io/lambdageo-tutorials/clojure/
 
 ## 12. Vídeo de apresentação
 
-[INSERIR LINK DO VÍDEO APÓS A GRAVAÇÃO]
+https://drive.google.com/drive/folders/1UdZTGLlb3YcDz3z3pPKyCn3G8NJUKH-x?usp=sharing
 
 O vídeo apresenta a arquitetura, as funcionalidades,
 a persistência SQLite e as principais dificuldades
